@@ -119,8 +119,14 @@ if(isset($_GET['url'])){
   echo json_encode($dat);
 
 }else{
-  echo json_encode([
-    //'format' => 'title,url,siteurl,feed'
-    'status' => 'good'
-  ]);
+  $res = array(
+  "versi"             => trim(file_get_contents('./versi')),
+  "name"              => str_replace('.herokuapp.com','',$_SERVER['HTTP_HOST']),
+  "node"              => gethostname(),
+  "server_name"       => $_SERVER['HTTP_HOST'],
+  "server_software"   => $_SERVER['SERVER_SOFTWARE'],
+  "remote_addr"       => $_SERVER['REMOTE_ADDR']
+  );
+  echo json_encode($res);
+	
 }
